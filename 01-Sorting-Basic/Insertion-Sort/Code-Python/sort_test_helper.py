@@ -2,7 +2,7 @@
 随机生成数值型数组
 """
 
-from selection_sort import sort
+from insertion_sort import sort
 import random
 import time
 
