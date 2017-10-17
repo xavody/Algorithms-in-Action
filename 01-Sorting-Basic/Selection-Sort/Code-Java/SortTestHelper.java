@@ -1,3 +1,5 @@
+package sortingBasic.selectionSort;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -58,3 +60,4 @@ public class SortTestHelper {
         }
     }
 }
+

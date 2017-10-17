@@ -2,7 +2,8 @@
 随机生成数值型数组
 """
 
-from insertion_sort import sort
+from .insertion_sort import sort as sort_ins
+from .selection_sort import sort as sort_sel
 import random
 import time
 
@@ -30,11 +31,19 @@ def is_sorted(arr):
     return True
 
 
-def test_sort(arr):
+def test_sort(arr1, arr2):
     """测试排序算法运行的正确性及所用时间"""
-    begin_time = time.time()
-    sort(arr)
-    end_time = time.time()
-    assert is_sorted(arr)  # 使用断言检查排序算法运行成功
-    print("排序结果: " + str(arr))
-    print("排序算法所用时间: " + str(end_time - begin_time) + 's')
+    begin_time_1 = time.time()
+    sort_ins(arr1)
+    end_time_1 = time.time()
+    assert is_sorted(arr1)  # 使用断言检查排序算法运行成功
+    print("插入排序结果: " + str(arr1))
+    print("插入排序算法所用时间: " + str(end_time_1 - begin_time_1) + 's')
+
+    print()
+    begin_time_2 = time.time()
+    sort_sel(arr2)
+    end_time_2 = time.time()
+    assert is_sorted(arr2)  # 使用断言检查排序算法运行成功
+    print("选择排序结果: " + str(arr2))
+    print("选择排序算法所用时间: " + str(end_time_2 - begin_time_2) + 's')

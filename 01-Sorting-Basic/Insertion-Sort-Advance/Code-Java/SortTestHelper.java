@@ -1,4 +1,4 @@
-package sortingBasic.insertionSort;
+package sortingBasic.insertionSortAdvance;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

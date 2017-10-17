@@ -1,3 +1,5 @@
+package sortingBasic.selectionSort;
+
 public class People implements Comparable<People> {
     private String name;
     private int age;

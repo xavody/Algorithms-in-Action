@@ -1,4 +1,4 @@
-import java.util.Arrays;
+package sortingBasic.selectionSort;
 
 /**
  * 选择排序（升序）
@@ -51,6 +51,6 @@ public class SelectionSort {
         Integer[] arr = SortTestHelper.generateRandomArray(20, 5, 10);
         System.out.print("初始数组：");
         SortTestHelper.printArray(arr);
-        SortTestHelper.testSort(arr);
+        SortTestHelper.testSort(arr, "sortingBasic.selectionSort.SelectionSort");
     }
 }
