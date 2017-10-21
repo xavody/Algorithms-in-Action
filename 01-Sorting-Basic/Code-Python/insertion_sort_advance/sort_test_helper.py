@@ -11,15 +11,7 @@ import time
 def new_array(n, min_range, max_range):
     """生成 n 个元素的整型（浮点型）数组，每个元素取值范围为 [minRange, maxRange]"""
     assert min_range <= max_range  #使用断言检查 minRange 是否不大于 maxRange
-    arr = []
-    for i in range(n):
-        # 生成一个指定范围内的整数
-        temp = random.randint(min_range, max_range)
-
-        # 生成一个指定范围内的浮点数
-        # arr[i] = random.uniform(min_range, max_range)
-
-        arr.append(temp)
+    arr = [random.randint(min_range, max_range) for _ in range(n)]
     return arr
 
 
@@ -39,6 +31,7 @@ def test_sort(arr1, arr2):
     assert is_sorted(arr1)  # 使用断言检查排序算法运行成功
     print("优化后插入排序结果: " + str(arr1))
     print("优化后插入排序算法所用时间: " + str(end_time_1 - begin_time_1) + 's')
+
     print()
     begin_time_2 = time.time()
     sort_sel(arr2)

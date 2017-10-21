@@ -1,7 +1,5 @@
 package sortingBasic.insertionSort;
 
-import java.util.Arrays;
-
 /**
  * 插入排序（升序）
  */
@@ -12,18 +10,11 @@ public class InsertionSort {
                 swap(arr, j, j - 1);
         }
     }
+
     //交换数组中两个数
     public static void swap(Object[] arr, int index1, int index2) {
         Object temp = arr[index1];
         arr[index1] = arr[index2];
         arr[index2] = temp;
-    }
-
-    //选择排序算法测试
-    public static void main(String[] args) {
-        Integer[] integers = SortTestHelper
-                .generateRandomArray(10, 0, 1000);
-        newSort(integers);
-        System.out.println(Arrays.toString(integers));
     }
 }

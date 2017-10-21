@@ -1,8 +1,7 @@
 package sortingBasic.insertionSortAdvance;
 
-import sortingBasic.insertionSort.SortTestHelper;
-
 import java.util.Arrays;
+import sortingBasic.sortTestHelper.SortTestHelper;
 
 public class Main {
     //比较优化后插入排序和选择排序性能
@@ -17,7 +16,7 @@ public class Main {
         SortTestHelper.testSort(integers1, "sortingBasic.insertionSortAdvance.InsertionSort");
         System.out.println();
         System.out.println("使用选择排序");
-        SortTestHelper.testSort(integers2, "sortingBasic.selectionSort.SelectionSort");
+        SortTestHelper.testSort(integers2, "sortingBasic.insertionSortAdvance.SelectionSort");
     }
 }
 

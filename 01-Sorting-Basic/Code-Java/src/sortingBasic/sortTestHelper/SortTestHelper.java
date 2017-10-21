@@ -1,4 +1,4 @@
-package sortingBasic.insertionSortAdvance;
+package sortingBasic.sortTestHelper;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -7,8 +7,6 @@ import java.util.Arrays;
  * 随机生成数组
  */
 public class SortTestHelper {
-    private SortTestHelper(){}
-
     // 生成 n 个元素的整型数组，每个元素取值范围为 [minRange, maxRange]
     public static Integer[] generateRandomArray(int n, int minRange, int maxRange) {
         assert minRange <= maxRange; //使用断言检查 minRange 不大于 maxRange

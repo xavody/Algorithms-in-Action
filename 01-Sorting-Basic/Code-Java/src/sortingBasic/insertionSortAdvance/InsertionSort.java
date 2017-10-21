@@ -1,7 +1,5 @@
 package sortingBasic.insertionSortAdvance;
 
-import sortingBasic.insertionSort.SortTestHelper;
-
 import java.util.Arrays;
 
 /**
@@ -16,13 +14,5 @@ public class InsertionSort {
                 arr[j] = arr[j - 1];
             arr[j] = e;
         }
-    }
-
-    //插入排序算法测试
-    public static void main(String[] args) {
-        Integer[] integers = SortTestHelper
-                .generateRandomArray(10, 0, 1000);
-        newSort(integers);
-        System.out.println(Arrays.toString(integers));
     }
 }
