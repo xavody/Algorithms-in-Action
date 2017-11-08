@@ -1,31 +1,24 @@
 """
-自顶向下进行归并排序
+自底向上进行归并排序
 """
 import copy
-import time
 from random import randint
 
 
 def merge_sort(lst):
     """
-    初始化，使归并排序边界正确
+    进行 lgN 次两两归并
     """
-    sort(lst, 0, len(lst) - 1)
-
-
-def sort(lst, l, r):
-    """
-    使用自顶向下、递归进行归并排序,对 lst[l...r] 的范围进行排序
-    """
-    if l >= r:
-        return
-    mid = (l + r) // 2
-    sort(lst, l, mid)  #将左半部分排序
-    sort(lst, mid + 1, r)  #将右半部分排序
-
-    # 对于 lst[mid] <= lst[mid + 1]的情况, 不进行merge
-    if lst[mid] > lst[mid + 1]:
-        merge(lst, l, mid, r)  #归并
+    n = len(lst)
+    sz = 1  # sz 子数组大小
+    while sz < n:
+        l = 0  # l 子数组索引
+        while l < n - sz:
+            # 对于 lst[mid] <= lst[mid + 1]的情况, 不进行merge
+            if lst[l + sz - 1] > lst[l + sz]:
+                merge(lst, l, l + sz - 1, min(l + sz + sz - 1, n - 1))
+            l += sz + sz
+        sz += sz
 
 
 def merge(lst, l, mid, r):
@@ -47,4 +40,3 @@ def merge(lst, l, mid, r):
         else:
             lst[k] = aux[j - l]
             j += 1
-
