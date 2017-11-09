@@ -2,10 +2,9 @@
 自底向上进行归并排序
 """
 import copy
-from random import randint
 
 
-def merge_sort(lst):
+def sort(lst):
     """
     进行 lgN 次两两归并
     """
@@ -40,3 +39,4 @@ def merge(lst, l, mid, r):
         else:
             lst[k] = aux[j - l]
             j += 1
+
