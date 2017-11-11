@@ -1,7 +1,5 @@
 package sortingAdvance.mergeSort;
 
-import sortingAdvance.sortTestHelper.SortTestHelper;
-
 import java.util.Arrays;
 
 /**
@@ -37,13 +35,5 @@ public class mergeSortBu {
             else if (aux[i].compareTo(aux[j]) < 0) arr[k] = aux[i++];
             else arr[k] = aux[j++];
         }
-    }
-
-    // 测试
-    public static void main(String[] args) {
-        Integer[] integers = SortTestHelper.generateRandomArray(100, 10, 60);
-        System.out.println(Arrays.toString(integers));
-        newSort(integers);
-        System.out.println(Arrays.toString(integers));
     }
 }
