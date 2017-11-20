@@ -9,3 +9,5 @@
 | **高级排序算法** | | |
 | 归并排序 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/tree/master/02-Sorting-Advance/Code-Python/merge_sort) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/tree/master/02-Sorting-Advance/Code-Java/mergeSort) |
 | 快速排序 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/tree/master/02-Sorting-Advance/Code-Python/quick_sort) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/tree/master/02-Sorting-Advance/Code-Java/quickSort) |
+| **堆排序** | | |
+| 原地堆排序 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/03-Heap-Sort/Code-Python/heap/heap_sort.py) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/03-Heap-Sort/Code-Java/heap/HeapSort.java) |
