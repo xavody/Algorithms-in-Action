@@ -36,15 +36,4 @@ public class BinarySearch {
             return find2(arr, target, l, mid - 1);
         else return find2(arr, target, mid + 1, r);
     }
-
-    // 测试
-    public static void main(String[] args) {
-        Integer[] arr = new Integer[50];
-        for (int i = 0; i < 50; i++)
-            arr[i] = i;
-        System.out.println(Arrays.toString(arr));
-        for (int i = 0; i < 50; i++){
-            assert find2(arr, i, 0, 49) == i;
-        }
-    }
 }

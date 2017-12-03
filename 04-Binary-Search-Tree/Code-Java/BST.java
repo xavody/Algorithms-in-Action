@@ -9,20 +9,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     // 二叉搜索树的根节点
     private Node root;
 
-    private class Node {
-        private Key key; // 键
-        private Value val; // 值
-        private Node left, right; // 指向子节点的链接
-        private int N; // 该节点为根节点的子树中节点的个数（含该节点）
-
-        private Node(Key key, Value val, int N) {
-            this.key = key;
-            this.val = val;
-            this.N = N;
-        }
-    }
-
-    // 返回二分搜索树的节点个数
+   // 返回二分搜索树的节点个数
     public int size() {
         return size(root);
     }
@@ -72,6 +59,46 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    // 返回二分搜索树的最小的键值
+    public Key getMin() {
+        Node minNode = getMin(root);
+        return minNode.key;
+    }
+
+    // 返回二分搜索树的最大的键值
+    public Key getMax() {
+        Node maxNode = getMax(root);
+        return maxNode.key;
+    }
+
+    // 删除二分搜索树中最小值所在节点
+    public void removeMin() {
+        if (root != null)
+            root = removeMin(root);
+    }
+
+    // 删除二分搜索树中最大值所在节点
+    public void removeMax() {
+        if (root != null)
+            root = removeMax(root);
+    }
+
+    // 从二分搜索树中删除键值为 key 的节点
+    public void remove(Key key) {
+        root = remove(root, key);
+    }
+
+    // 找到排名为 k 的键，即有 k 个小于它的键，排名从0开始
+    public Key select(int k) {
+        return select(root, k).key;
+    }
+
+    // 找到 key 的排名，排名从0开始
+    public int rank(Key key) {
+        return rank(root, key);
+    }
+
+
     /*
     辅助函数
      */
@@ -82,7 +109,6 @@ public class BST<Key extends Comparable<Key>, Value> {
             return 0;
         return node.N;
     }
-
 
     // 如果 key 存在于 node 为根节点的子树中就更新它的值
     // 不存在就将 key-value 键值对作为新节点插入到子树中
@@ -144,31 +170,131 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    public static void main(String[] args) {
-        BST bst = new BST();
+    // 返回以 node 为根的二分搜索树的最小键值所在的节点
+    private Node getMin(Node node) {
+        if (node.left == null)
+            return node;
+        return getMin(node.left);
+    }
 
-        int N = 20;
-        Integer[] arr = new Integer[N];
-        for(int i = 0 ; i < N ; i ++)
-            arr[i] = i;
+    // 返回以 node 为根的二分搜索树的最大键值所在的节点
+    private Node getMax(Node node) {
+        if (node.right == null)
+            return node;
+        return getMax(node.right);
+    }
 
-        // 打乱数组顺序
-        for(int i = 0 ; i < N ; i++){
-            int pos = (int) (Math.random() * (i+1));
-            Integer t = arr[pos];
-            arr[pos] = arr[i];
-            arr[i] = t;
+    // 删除以 node 为根的二分搜索树中的最小节点
+    // 返回删除节点后新的二分搜索树的根
+    private Node removeMin(Node node) {
+        if (node.left == null) {
+            Node nodeRight = node.right;
+            node.right = null;
+            return nodeRight;
         }
+        node.left = removeMin(node.left);
+        shiftN(node);
+        return node;
+    }
 
-        for (int i = 0; i < N; i++) {
-            bst.insert(arr[i], Integer.toString(arr[i]));
+    // 删除以 node 为根的二分搜索树中的最大节点
+    // 返回删除节点后新的二分搜索树的根
+    private Node removeMax(Node node) {
+        if (node.right == null) {
+            Node nodeLeft = node.left;
+            node.left = null;
+            return nodeLeft;
         }
+        node.right = removeMax(node.right);
+        shiftN(node);
+        return node;
+    }
 
-        System.out.println(bst.size());
-        System.out.println();
+    // 删除以 node 为根的二分搜索树中键值为 key 的节点, 递归算法
+    // 返回删除节点后新的二分搜索树的根
+    private Node remove(Node node, Key key) {
+        if (node == null)
+            return null;
 
-        bst.inOrder();
-        System.out.println();
-        bst.levelOrder();
+        int cmp = node.key.compareTo(key);
+        if (cmp > 0) {
+            node.left = remove(node.left, key);
+            shiftN(node);
+            return node;
+        } else if (cmp < 0) {
+            node.right = remove(node.right, key);
+            shiftN(node);
+            return node;
+        } else {
+            if (node.left == null) { //待删除节点左子树为空
+                Node nodeRight = node.right;
+                node.right = null;
+                return nodeRight;
+            } else if (node.right == null) { //待删除节点右子树为空的情况
+                Node nodeLeft = node.left;
+                node.left = null;
+                return nodeLeft;
+            } else {
+                // 待删除节点左右子树均不为空
+                // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
+                // 用这个节点顶替待删除节点的位置
+                Node t = node;
+                node = getMin(t.right);
+                node.right = removeMin(t.right);
+                node.left = t.left;
+                shiftN(node);
+                return node;
+            }
+        }
+    }
+
+    // 使各节点以本节点为根节点的子树中节点的个数正确
+    private void shiftN(Node node) {
+        if (node.left == null && node.right == null)
+            node.N = 1;
+        else if (node.left == null)
+            node.N = node.right.N + 1;
+        else if (node.right == null)
+            node.N = node.left.N + 1;
+        else node.N = node.left.N + node.right.N + 1;
+    }
+
+    // 返回排名为 k 的节点
+    private Node select(Node node, int k) {
+        if (node == null)
+            return null;
+        int t = size(node.left);
+        if (t > k)
+            return select(node.left, k);
+        else if (t < k)
+            return select(node.right, k - t - 1);
+        else
+            return node;
+    }
+
+    // 返回以 node 以根节点的子树中小于 node.key 的数量
+    private int rank(Node node, Key key) {
+        if (node == null)
+            return 0;
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0)
+            return rank(node.left, key);
+        else if (cmp > 0)
+            return rank(node.right, key) + size(node.left) + 1;
+        else
+            return size(node.left);
+    }
+
+    private class Node {
+        private Key key; // 键
+        private Value val; // 值
+        private Node left, right; // 指向子节点的链接
+        private int N; // 该节点为根节点的子树中节点的个数（含该节点）
+
+        private Node(Key key, Value val, int N) {
+            this.key = key;
+            this.val = val;
+            this.N = N;
+        }
     }
 }

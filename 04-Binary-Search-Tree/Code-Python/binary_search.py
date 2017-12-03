@@ -33,11 +33,3 @@ def find2(lst, target, l, r):
         return find2(lst, target, l, mid - 1)
     else:
         return find2(lst, target, mid + 1, r)
-
-
-# 测试
-lst = [x for x in range(10, 50, 2)]
-print(lst)
-index = find2(lst, 34, 0, 25)
-print('index:', index)
-print('result:', lst[index])
