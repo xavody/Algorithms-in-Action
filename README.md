@@ -11,3 +11,7 @@
 | 快速排序 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/tree/master/02-Sorting-Advance/Code-Python/quick_sort) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/tree/master/02-Sorting-Advance/Code-Java/quickSort) |
 | **堆排序** | | |
 | 原地堆排序 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/03-Heap-Sort/Code-Python/heap/heap_sort.py) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/03-Heap-Sort/Code-Java/heap/HeapSort.java) |
+| 最大堆 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/03-Heap-Sort/Code-Python/heap/max_heap.py) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/03-Heap-Sort/Code-Java/heap/MaxHeap.java) |
+| **二分搜索树** | | |
+| 二分查找法 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/04-Binary-Search-Tree/Code-Python/binary_search.py) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/04-Binary-Search-Tree/Code-Java/BinarySearch.java) |
+| 二分搜索树 | [Python 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/04-Binary-Search-Tree/Code-Python/BST.py) | [Java 源码](https://github.com/tyrotalk/Algorithms-in-Action/blob/master/04-Binary-Search-Tree/Code-Java/BST.java) |
