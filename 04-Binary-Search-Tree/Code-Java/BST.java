@@ -3,13 +3,60 @@ package binarySearchTree;
 import java.util.LinkedList;
 
 /**
- * 二叉搜索树
+ * 二分搜索树
  */
 public class BST<Key extends Comparable<Key>, Value> {
-    // 二叉搜索树的根节点
+    // 二分搜索树的根结点
     private Node root;
 
-   // 返回二分搜索树的节点个数
+    public static void main(String[] args) {
+        BST bst = new BST();
+
+        int N = 20;
+        Integer[] arr = new Integer[N];
+        for (int i = 0; i < N; i++)
+            arr[i] = i;
+
+        // 打乱数组顺序
+        for (int i = 0; i < N; i++) {
+            int pos = (int) (Math.random() * (i + 1));
+            Integer t = arr[pos];
+            arr[pos] = arr[i];
+            arr[i] = t;
+        }
+
+        for (int i = 0; i < N; i++) {
+            bst.insert(arr[i], Integer.toString(arr[i]));
+        }
+
+        System.out.println(bst.size());
+        System.out.println();
+
+        bst.inOrder();
+        System.out.println();
+
+        System.out.println(bst.getMin());
+        System.out.println(bst.getMax());
+
+        System.out.println("**********");
+
+//        System.out.println();
+//        bst.removeMin();
+//        System.out.println(bst.size());
+//
+//        System.out.println();
+//        bst.removeMax();
+//        System.out.println(bst.size());
+        System.out.println(bst.select(10));
+        System.out.println("arr[10]: " + arr[10]);
+        System.out.println(bst.rank(arr[10]));
+
+//        bst.remove(arr[10]);
+//        System.out.println();
+//        System.out.println(bst.size());
+    }
+
+    // 返回二分搜索树的结点个数
     public int size() {
         return size(root);
     }
@@ -71,19 +118,19 @@ public class BST<Key extends Comparable<Key>, Value> {
         return maxNode.key;
     }
 
-    // 删除二分搜索树中最小值所在节点
+    // 删除二分搜索树中最小值所在结点
     public void removeMin() {
         if (root != null)
             root = removeMin(root);
     }
 
-    // 删除二分搜索树中最大值所在节点
+    // 删除二分搜索树中最大值所在结点
     public void removeMax() {
         if (root != null)
             root = removeMax(root);
     }
 
-    // 从二分搜索树中删除键值为 key 的节点
+    // 从二分搜索树中删除键值为 key 的结点
     public void remove(Key key) {
         root = remove(root, key);
     }
@@ -103,15 +150,15 @@ public class BST<Key extends Comparable<Key>, Value> {
     辅助函数
      */
 
-    // 返回二分搜索树某节点为根节点的子树中节点的个数（含该节点）
+    // 返回二分搜索树某结点为根结点的子树中结点的个数（含该结点）
     private int size(Node node) {
         if (node == null)
             return 0;
         return node.N;
     }
 
-    // 如果 key 存在于 node 为根节点的子树中就更新它的值
-    // 不存在就将 key-value 键值对作为新节点插入到子树中
+    // 如果 key 存在于 node 为根结点的子树中就更新它的值
+    // 不存在就将 key-value 键值对作为新结点插入到子树中
     private Node insert(Node node, Key key, Value val) {
         if (node == null)
             return new Node(key, val, 1);
@@ -126,7 +173,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         return node;
     }
 
-    // 在以 node 为根节点的子树中查找并返回 key 所对应的值
+    // 在以 node 为根结点的子树中查找并返回 key 所对应的值
     // 如果找不到返回 null
     private Value search(Node node, Key key) {
         if (node == null)
@@ -141,7 +188,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     // 深度优先遍历
-    // 对以 node 为根的二叉搜索树进行基于递归的前序遍历
+    // 对以 node 为根的二分搜索树进行基于递归的前序遍历
     private void preOrder(Node node) {
         if (node != null) {
             System.out.println(node.key);
@@ -151,7 +198,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     // 深度优先遍历
-    // 对以 node 为根的二叉搜索树进行基于递归的中序遍历
+    // 对以 node 为根的二分搜索树进行基于递归的中序遍历
     private void inOrder(Node node) {
         if (node != null) {
             inOrder(node.left);
@@ -161,7 +208,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     // 深度优先遍历
-    // 对以 node 为根的二叉搜索树进行基于递归的后序遍历
+    // 对以 node 为根的二分搜索树进行基于递归的后序遍历
     private void postOrder(Node node) {
         if (node != null) {
             postOrder(node.left);
@@ -170,22 +217,22 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    // 返回以 node 为根的二分搜索树的最小键值所在的节点
+    // 返回以 node 为根的二分搜索树的最小键值所在的结点
     private Node getMin(Node node) {
         if (node.left == null)
             return node;
         return getMin(node.left);
     }
 
-    // 返回以 node 为根的二分搜索树的最大键值所在的节点
+    // 返回以 node 为根的二分搜索树的最大键值所在的结点
     private Node getMax(Node node) {
         if (node.right == null)
             return node;
         return getMax(node.right);
     }
 
-    // 删除以 node 为根的二分搜索树中的最小节点
-    // 返回删除节点后新的二分搜索树的根
+    // 删除以 node 为根的二分搜索树中的最小结点
+    // 返回删除结点后新的二分搜索树的根
     private Node removeMin(Node node) {
         if (node.left == null) {
             Node nodeRight = node.right;
@@ -197,8 +244,8 @@ public class BST<Key extends Comparable<Key>, Value> {
         return node;
     }
 
-    // 删除以 node 为根的二分搜索树中的最大节点
-    // 返回删除节点后新的二分搜索树的根
+    // 删除以 node 为根的二分搜索树中的最大结点
+    // 返回删除结点后新的二分搜索树的根
     private Node removeMax(Node node) {
         if (node.right == null) {
             Node nodeLeft = node.left;
@@ -210,8 +257,8 @@ public class BST<Key extends Comparable<Key>, Value> {
         return node;
     }
 
-    // 删除以 node 为根的二分搜索树中键值为 key 的节点, 递归算法
-    // 返回删除节点后新的二分搜索树的根
+    // 删除以 node 为根的二分搜索树中键值为 key 的结点, 递归算法
+    // 返回删除结点后新的二分搜索树的根
     private Node remove(Node node, Key key) {
         if (node == null)
             return null;
@@ -226,18 +273,18 @@ public class BST<Key extends Comparable<Key>, Value> {
             shiftN(node);
             return node;
         } else {
-            if (node.left == null) { //待删除节点左子树为空
+            if (node.left == null) { //待删除结点左子树为空
                 Node nodeRight = node.right;
                 node.right = null;
                 return nodeRight;
-            } else if (node.right == null) { //待删除节点右子树为空的情况
+            } else if (node.right == null) { //待删除结点右子树为空的情况
                 Node nodeLeft = node.left;
                 node.left = null;
                 return nodeLeft;
             } else {
-                // 待删除节点左右子树均不为空
-                // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
-                // 用这个节点顶替待删除节点的位置
+                // 待删除结点左右子树均不为空
+                // 找到比待删除结点大的最小结点, 即待删除结点右子树的最小结点
+                // 用这个结点顶替待删除结点的位置
                 Node t = node;
                 node = getMin(t.right);
                 node.right = removeMin(t.right);
@@ -248,7 +295,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    // 使各节点以本节点为根节点的子树中节点的个数正确
+    // 使各结点以本结点为根结点的子树中结点的个数正确
     private void shiftN(Node node) {
         if (node.left == null && node.right == null)
             node.N = 1;
@@ -259,7 +306,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         else node.N = node.left.N + node.right.N + 1;
     }
 
-    // 返回排名为 k 的节点
+    // 返回排名为 k 的结点
     private Node select(Node node, int k) {
         if (node == null)
             return null;
@@ -272,7 +319,7 @@ public class BST<Key extends Comparable<Key>, Value> {
             return node;
     }
 
-    // 返回以 node 以根节点的子树中小于 node.key 的数量
+    // 返回以 node 以根结点的子树中小于 node.key 的数量
     private int rank(Node node, Key key) {
         if (node == null)
             return 0;
@@ -288,8 +335,8 @@ public class BST<Key extends Comparable<Key>, Value> {
     private class Node {
         private Key key; // 键
         private Value val; // 值
-        private Node left, right; // 指向子节点的链接
-        private int N; // 该节点为根节点的子树中节点的个数（含该节点）
+        private Node left, right; // 指向子结点的链接
+        private int N; // 该结点为根结点的子树中结点的个数（含该结点）
 
         private Node(Key key, Value val, int N) {
             this.key = key;

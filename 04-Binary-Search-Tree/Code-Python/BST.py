@@ -1,27 +1,26 @@
 """
-二叉搜索树
+二分搜索树
 """
 import queue
-from random import randint
 
 
 class BST(object):
     class Node(object):
-        """二分查找树上一个节点"""
+        """二分搜索树上一个结点"""
 
         def __init__(self, key=None, val=None, n=None):
             self.key = key
             self.val = val
             self.left = None
             self.right = None
-            self.N = n  # 该节点为根节点的子树中节点的个数（含该节点）
+            self.N = n  # 该结点为根结点的子树中结点的个数（含该结点）
 
     def __init__(self):
-        """根节点"""
+        """根结点"""
         self.__root = None
 
     def size(self):
-        """返回二分搜索树的节点个数"""
+        """返回二分搜索树的结点个数"""
         return self.__size(self.__root)
 
     def is_empty(self):
@@ -31,7 +30,7 @@ class BST(object):
     def insert(self, key, val):
         """
         向二分搜索树中插入一个新的(key, Value)数据对
-        查找 key，找到则更新它的值，否则创建一个新的节点
+        查找 key，找到则更新它的值，否则创建一个新的结点
         """
         self.__root = self.__insert(self.__root, key, val)
 
@@ -74,17 +73,17 @@ class BST(object):
         return max_node.key
 
     def remove_min(self):
-        """删除二分搜索树中最小值所在节点"""
+        """删除二分搜索树中最小值所在结点"""
         if self.__root is not None:
             self.__root = self.__remove_min(self.__root)
 
     def remove_max(self):
-        """删除二分搜索树中最小值所在节点"""
+        """删除二分搜索树中最小值所在结点"""
         if self.__root is not None:
             self.__root = self.__remove_max(self.__root)
 
     def remove(self, key):
-        """从二分搜索树中删除键值为 key 的节点"""
+        """从二分搜索树中删除键值为 key 的结点"""
         self.__remove(self.__root, key)
 
     def select(self, k):
@@ -99,13 +98,13 @@ class BST(object):
 
     @staticmethod
     def __size(node):
-        """返回二分搜索树某节点为根节点的子树中节点的个数（含该节点）"""
+        """返回二分搜索树某结点为根结点的子树中结点的个数（含该结点）"""
         return node.N if node else 0
 
     def __insert(self, node, key, val):
         """
-        如果 key 存在于 node 为根节点的子树中就更新它的值
-        不存在就将 key-value 键值对作为新节点插入到子树中
+        如果 key 存在于 node 为根结点的子树中就更新它的值
+        不存在就将 key-value 键值对作为新结点插入到子树中
         """
         if node is None:
             return BST.Node(key, val, 1)
@@ -119,7 +118,7 @@ class BST(object):
         return node
 
     def __search(self, node, key):
-        """在以 node 为根节点的子树中查找并返回 key 所对应的值如果找不到返回 null"""
+        """在以 node 为根结点的子树中查找并返回 key 所对应的值如果找不到返回 None"""
         if node is None:
             return None
         if node.key == key:
@@ -132,7 +131,7 @@ class BST(object):
     def __pre_order(self, node):
         """
         深度优先遍历
-        对以 node 为根的二叉搜索树进行基于递归的前序遍历
+        对以 node 为根的二分搜索树进行基于递归的前序遍历
         """
         if node:
             print(node.val)
@@ -142,7 +141,7 @@ class BST(object):
     def __in_order(self, node):
         """
         深度优先遍历
-        对以 node 为根的二叉搜索树进行基于递归的中序遍历
+        对以 node 为根的二分搜索树进行基于递归的中序遍历
         """
         if node:
             self.__in_order(node.left)
@@ -152,7 +151,7 @@ class BST(object):
     def __post_order(self, node):
         """
         深度优先遍历
-        对以 node 为根的二叉搜索树进行基于递归的后序遍历
+        对以 node 为根的二分搜索树进行基于递归的后序遍历
         """
         if node:
             self.__post_order(node.left)
@@ -160,21 +159,21 @@ class BST(object):
             print(node.val)
 
     def __get_min(self, node):
-        """返回以 node 为根的二分搜索树的最小键值所在的节点"""
+        """返回以 node 为根的二分搜索树的最小键值所在的结点"""
         if node.left is None:
             return node
         return self.__get_min(node.left)
 
     def __get_max(self, node):
-        """返回以 node 为根的二分搜索树的最大键值所在的节点"""
+        """返回以 node 为根的二分搜索树的最大键值所在的结点"""
         if node.right is None:
             return node
         return self.__get_max(node.right)
 
     def __remove_min(self, node):
         """
-        删除以 node 为根的二分搜索树中的最小节点
-        返回删除节点后新的二分搜索树的根
+        删除以 node 为根的二分搜索树中的最小结点
+        返回删除结点后新的二分搜索树的根
         """
         if node.left is None:
             node_right = node.right
@@ -186,8 +185,8 @@ class BST(object):
 
     def __remove_max(self, node):
         """
-        删除以 node 为根的二分搜索树中的最大节点
-        返回删除节点后新的二分搜索树的根
+        删除以 node 为根的二分搜索树中的最大结点
+        返回删除结点后新的二分搜索树的根
         """
         if node.right is None:
             node_left = node.left
@@ -199,8 +198,8 @@ class BST(object):
 
     def __remove(self, node, key):
         """
-        删除以 node 为根的二分搜索树中键值为 key 的节点, 递归算法
-        返回删除节点后新的二分搜索树的根
+        删除以 node 为根的二分搜索树中键值为 key 的结点, 递归算法
+        返回删除结点后新的二分搜索树的根
         """
         if node is None:
             return node
@@ -214,30 +213,30 @@ class BST(object):
             self.__shift_n(node)
             return node
         else:
-            if node.left is None:  #待删除节点左子树为空
+            if node.left is None:  #待删除结点左子树为空
                 node_right = node.right
                 node.right = None
                 return node_right
-            elif node.right is None:  #待删除节点右子树为空的情况
+            elif node.right is None:  #待删除结点右子树为空的情况
                 node_left = node.left
                 node.left = None
                 return node_left
             else:
                 """
-                待删除节点左右子树均不为空
-                找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
-                用这个节点顶替待删除节点的位置
+                待删除结点左右子树均不为空
+                找到比待删除结点大的最小结点, 即待删除结点右子树的最小结点
+                用这个结点顶替待删除结点的位置
                 """
                 t = node
-                node = self.__get_min(t)
-                node.right = self.__remove_min(t)
+                node = self.__get_min(t.right)
+                node.right = self.__remove_min(t.right)
                 node.left = t.left
                 self.__shift_n(node)
                 return node
 
     @staticmethod
     def __shift_n(node):
-        """使各节点以本节点为根节点的子树中节点的个数正确"""
+        """使各结点以本结点为根结点的子树中结点的个数正确"""
         if node.left is None and node.right is None:
             node.N = 1
         elif node.left is None:
@@ -248,7 +247,7 @@ class BST(object):
             node.N = node.right.N + node.left.N + 1
 
     def __select(self, node, k):
-        """返回排名为 k 的节点"""
+        """返回排名为 k 的结点"""
         if node is None:
             return None
         t = self.__size(node.left)
@@ -260,7 +259,7 @@ class BST(object):
             return node
 
     def __rank(self, node, key):
-        """返回以 node 以根节点的子树中小于 node.key 的数量"""
+        """返回以 node 以根结点的子树中小于 node.key 的数量"""
         if node is None:
             return 0
         if key < node.key:
@@ -270,34 +269,3 @@ class BST(object):
         else:
             return self.__size(node.left)
 
-
-if __name__ == '__main__':
-    nodes = BST()
-    lst = [randint(10, 1000) for _ in range(20)]
-    for i in lst:
-        nodes.insert(i, str(i))
-    print(nodes.size())
-    print()
-
-    nodes.in_order()
-    print()
-
-    print()
-    print(nodes.get_min())
-    print(nodes.get_max())
-
-    print('********')
-    # nodes.remove_min()
-    # print(nodes.size())
-    # nodes.remove_max()
-    # print(nodes.size())
-    # temp = lst[10]
-    # print('temp:', temp)
-    # nodes.remove(temp)
-    # nodes.in_order()
-    # print()
-    # print(nodes.size())
-
-    print(nodes.select(5))
-    print('lst[10]', lst[10])
-    print(nodes.rank(lst[10]))

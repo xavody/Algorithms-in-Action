@@ -33,3 +33,4 @@ def find2(lst, target, l, r):
         return find2(lst, target, l, mid - 1)
     else:
         return find2(lst, target, mid + 1, r)
+

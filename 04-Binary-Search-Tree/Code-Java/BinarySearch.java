@@ -1,6 +1,5 @@
 package binarySearchTree;
 
-import java.util.Arrays;
 
 /**
  * 非递归的二分查找算法
@@ -23,7 +22,6 @@ public class BinarySearch {
                 l = mid + 1;
         }
         return -1;
-        // TODO:
     }
 
     // 递归方法
