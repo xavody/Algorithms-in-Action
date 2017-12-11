@@ -1,19 +1,23 @@
 package UnionFind;
 
 /**
- * 并查集——版本二
+ * 并查集——版本四
  * 使用一个数组构建一棵指向父节点的树
  * 并查集时间复杂度近乎是 O(1)
  */
-public class UnionFind2 {
+public class UnionFind4 {
     private int count;  // 数据个数
     private int[] parent;  // parent[i]表示元素所指向的父节点
+    private int[] rank;  // rank[i]表示以i为根的集合所表示的树的层数
 
-    public UnionFind2(int count) {
+    public UnionFind4(int count) {
         parent = new int[count];
+        rank = new int[count];
         this.count = count;
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++) {
             parent[i] = i;
+            rank[i] = 1;
+        }
     }
 
     // 查找元素 p 所对应的集合编号
@@ -41,6 +45,17 @@ public class UnionFind2 {
 
         if (pRoot == qRoot)
             return;
-        parent[pRoot] = qRoot;
+
+        // 根据两个元素所在树的元素个数不同判断合并方向
+        // 将元素个数少的集合合并到元素个数多的集合上
+        if (rank[pRoot] > rank[qRoot])
+            parent[qRoot] = pRoot;
+        else if (rank[pRoot] < rank[qRoot])
+            parent[pRoot] = qRoot;
+        else {
+            // rank[pRoot] == rank[qRoot]
+            parent[pRoot] = qRoot;
+            rank[qRoot]++;
+        }
     }
 }

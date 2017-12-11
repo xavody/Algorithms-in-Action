@@ -2,6 +2,7 @@ package UnionFind;
 
 /**
  * 并查集——版本一
+ * 并查集时间复杂度近乎是 O(1)
  */
 public class UnionFind1 {
     private int count;  // 数据个数
