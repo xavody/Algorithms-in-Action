@@ -1,11 +1,11 @@
 package graphBasics;
 
-import java.util.Arrays;
+import java.util.Vector;
 
 /**
  * 稠密图——邻接矩阵
  */
-public class DenseGraph {
+public class DenseGraph implements Graph{
     private int n;  // 节点数
     private int m;  // 边数
     private boolean directed;  // 是否为有向图
@@ -51,5 +51,24 @@ public class DenseGraph {
         assert v >= 0 && v < n;
         assert w >= 0 && w < n;
         return g[v][w];
+    }
+
+    // 返回图中一个顶点的所有邻边
+    public Iterable<Integer> adj(int v) {
+        assert v >= 0 && v < n;
+        Vector<Integer> adjV = new Vector<>();
+        for (int i = 0; i < n; i++)
+            if (g[v][i])
+                adjV.add(i);
+        return adjV;
+    }
+
+    // 显示图的信息
+    public void show() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++)
+                System.out.print(g[i][j] + "\t");
+            System.out.println();
+        }
     }
 }

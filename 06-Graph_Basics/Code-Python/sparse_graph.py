@@ -3,7 +3,7 @@
 """
 
 
-class SparseGraph(object):
+class SparseGraph:
     def __init__(self, n, directed):
         """
         g 初始化为 n 个空的 list, 表示每一个 g[i] 都为空, 即没有任何边
@@ -42,3 +42,15 @@ class SparseGraph(object):
         if w in self.g[v]:
             return True
         return False
+
+    def adj(self, v):
+        """返回图中一个顶点的所有邻边"""
+        return self.g[v]
+
+    def show(self):
+        """显示图的信息"""
+        for i in self.g:
+            for j in i:
+                print(j, end='\t')
+            print()
+

@@ -5,7 +5,7 @@ import java.util.Vector;
 /**
  * 稀疏图——邻接表
  */
-public class SparseGraph {
+public class SparseGraph implements Graph{
     private int n;  // 节点数
     private int m;  // 边数
     private boolean directed;  // 是否为有向图
@@ -56,5 +56,20 @@ public class SparseGraph {
                 return true;
         }
         return false;
+    }
+
+    // 返回图中一个顶点的所有邻边
+    public Iterable<Integer> adj(int v) {
+        assert v >= 0 && v < n;
+        return g[v];
+    }
+
+    // 显示图的信息
+    public void show() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < g[i].size(); j++)
+                System.out.print(g[i].elementAt(j) + "\t");
+            System.out.println();
+        }
     }
 }
