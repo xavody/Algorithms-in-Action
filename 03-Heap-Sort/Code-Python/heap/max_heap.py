@@ -56,7 +56,7 @@ class MaxHeap(object):
         assert self.count > 0
         re_max = self.data[1]
         self.data[1] = self.data[self.count]
-        self.data[self.count] = None
+        self.data.pop()
         self.count -= 1
         self.shift_down(1)
         return re_max
