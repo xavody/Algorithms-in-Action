@@ -59,3 +59,4 @@ class DenseWeightedGraph:
                 else:
                     print(j, end='\t')
             print()
+

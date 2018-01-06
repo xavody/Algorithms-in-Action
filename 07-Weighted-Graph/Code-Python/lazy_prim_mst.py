@@ -9,15 +9,15 @@ from weighted_graph.sparse_weighted_graph import SparseWeightedGraph
 class LazyPrimMST:
     def __init__(self, graph):
         self.G = graph  #图的引用
-        self.minHeap = MinHeap(self.G.get_e())
-        self.marked = [False for _ in range(self.G.get_v())]
-        self.mst = []
-        self.mst_weight = 0.0
+        self.min_heap = MinHeap(self.G.get_e())  # 最小索引堆, 算法辅助数据结构
+        self.marked = [False for _ in range(self.G.get_v())]  # 标记数组, 在算法运行过程中标记节点 i 是否被访问
+        self.mst = []  # 最小生成树所包含的所有边
+        self.mst_weight = 0.0  # 最小生成树的权值
 
         self.visit(0)
-        while not self.minHeap.is_empty():
+        while not self.min_heap.is_empty():
             # 使用最小堆找出已经访问的边中权值最小的边
-            e = self.minHeap.extract_min()
+            e = self.min_heap.extract_min()
             if self.marked[e.get_v()] == self.marked[e.get_w()]:
                 # 如果这条边的两端都已经访问过了, 则扔掉这条边
                 continue
@@ -31,9 +31,7 @@ class LazyPrimMST:
                 self.visit(e.get_w())
 
         for i in self.mst:
-            print('-' + str(i.get_weight()))
             self.mst_weight += i.get_weight()
-            print('-' + str(self.mst_weight))
 
     def visit(self, v):
         """访问节点 v"""
@@ -42,8 +40,8 @@ class LazyPrimMST:
 
         # 将和节点 v 相连接的所有未访问的边放入最小堆中
         for e in self.G.adj(v):
-            if not self.marked[e.get_w()]:
-                self.minHeap.insert(e)
+            if not self.marked[e.other(v)]:
+                self.min_heap.insert(e)
 
     def get_mst(self):
         """返回最小生成树的所有边"""

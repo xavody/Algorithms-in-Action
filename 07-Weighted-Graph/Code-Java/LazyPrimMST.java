@@ -4,6 +4,7 @@ import java.util.Vector;
 
 /**
  * 使用 Prim 算法求带权无向连通图的最小生成树
+ * 时间复杂度 O(ElogE)
  */
 public class LazyPrimMST<Weight extends Number & Comparable> {
     private WeightedGraph<Weight> G;  //图的引用
@@ -37,8 +38,8 @@ public class LazyPrimMST<Weight extends Number & Comparable> {
             else
                 visit(e.getW());
         }
-        // 计算最小生成树的权值
 
+        // 计算最小生成树的权值
         for (int i = 0; i < mst.size(); i++)
             mstWeight = mstWeight.doubleValue() + mst.elementAt(i).getWeight().doubleValue();
     }

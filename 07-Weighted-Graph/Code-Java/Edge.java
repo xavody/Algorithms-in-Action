@@ -30,7 +30,6 @@ public class Edge<Weight extends Number & Comparable> implements Comparable<Edge
     }
 
     // 返回权值
-
     public Weight getWeight() {
         return weight;
     }
@@ -48,7 +47,6 @@ public class Edge<Weight extends Number & Comparable> implements Comparable<Edge
     }
 
     // 边之间的比较
-
     @Override
     public int compareTo(Edge o) {
         if (weight.compareTo(o.getWeight()) < 0)
