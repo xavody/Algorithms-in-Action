@@ -71,7 +71,7 @@ public class MinHeap<Item extends Comparable> {
 
     // 由上至下的堆有序化，保证最小堆的性质
     public void shiftDown(int k) {
-        while (k * 2 < count) {
+        while (k * 2 <= count) {
             int j = k * 2;
             if (j + 1 <= count && data[j + 1].compareTo(data[j]) < 0)
                 j++;
