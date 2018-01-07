@@ -1,7 +1,6 @@
 """
 带权图的稀疏图——邻接表
 """
-from weighted_graph.edge import Edge
 
 
 class SparseWeightedGraph:

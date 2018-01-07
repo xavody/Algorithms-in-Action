@@ -2,8 +2,6 @@
 使用优化的Prim算法求图的最小生成树
 """
 from weighted_graph.index_min_heap import IndexMinHeap
-from weighted_graph.edge import Edge
-from weighted_graph.sparse_weighted_graph import SparseWeightedGraph
 
 
 class PrimMst:

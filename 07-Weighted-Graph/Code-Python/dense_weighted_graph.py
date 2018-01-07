@@ -1,7 +1,6 @@
 """
 带权图的稠密图——邻接矩阵
 """
-from weighted_graph.edge import Edge
 
 
 class DenseWeightedGraph:

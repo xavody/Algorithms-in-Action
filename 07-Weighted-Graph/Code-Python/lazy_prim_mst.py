@@ -2,8 +2,6 @@
 使用 Prim 算法求带权无向连通图的最小生成树
 """
 from weighted_graph.min_heap import MinHeap
-from weighted_graph.edge import Edge
-from weighted_graph.sparse_weighted_graph import SparseWeightedGraph
 
 
 class LazyPrimMST:
