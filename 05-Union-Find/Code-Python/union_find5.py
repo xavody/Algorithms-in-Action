@@ -5,7 +5,7 @@
 """
 
 
-class UnionFind3(object):
+class UnionFind5(object):
     def __init__(self, count):
         self.count = count  # 数据个数
 
